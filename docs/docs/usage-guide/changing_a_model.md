@@ -1,8 +1,8 @@
 ## Changing a model in PR-Agent
 
-See [here](https://github.com/the-pr-agent/pr-agent/blob/main/pr_agent/algo/__init__.py) for a list of supported models in PR-Agent.
+See [here](https://github.com/the-dvmn-agent/dvmn-agent/blob/main/pr_agent/algo/__init__.py) for a list of supported models in PR-Agent.
 The default model of PR-Agent is `GPT-5` from OpenAI.
-To use a different model than the default, you need to edit in the [configuration file](https://github.com/the-pr-agent/pr-agent/blob/main/pr_agent/settings/configuration.toml#L7) the fields:
+To use a different model than the default, you need to edit in the [configuration file](https://github.com/the-dvmn-agent/dvmn-agent/blob/main/pr_agent/settings/configuration.toml#L7) the fields:
 
 ```toml
 [config]
@@ -101,7 +101,7 @@ duplicate_examples=true # will duplicate the examples in the prompt, to help the
 api_base = "http://localhost:11434" # or whatever port you're running Ollama on
 ```
 
-By default, Ollama uses a context window size of 2048 tokens. In most cases this is not enough to cover pr-agent prompt and pull-request diff. Context window size can be overridden with the `OLLAMA_CONTEXT_LENGTH` environment variable. For example, to set the default context length to 8K, use: `OLLAMA_CONTEXT_LENGTH=8192 ollama serve`. More information you can find on the [official ollama faq](https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-specify-the-context-window-size).
+By default, Ollama uses a context window size of 2048 tokens. In most cases this is not enough to cover dvmn-agent prompt and pull-request diff. Context window size can be overridden with the `OLLAMA_CONTEXT_LENGTH` environment variable. For example, to set the default context length to 8K, use: `OLLAMA_CONTEXT_LENGTH=8192 ollama serve`. More information you can find on the [official ollama faq](https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-specify-the-context-window-size).
 
 Please note that the `custom_model_max_tokens` setting should be configured in accordance with the `OLLAMA_CONTEXT_LENGTH`. Failure to do so may result in unexpected model output.
 
@@ -111,7 +111,7 @@ Please note that the `custom_model_max_tokens` setting should be configured in a
     Commercial models such as GPT-5, Claude Sonnet, and Gemini have demonstrated robust capabilities in generating structured output for code analysis tasks with large input. In contrast, most open-source models currently available (as of January 2025) face challenges with these complex tasks.
 
     Based on our testing, local open-source models are suitable for experimentation and learning purposes (mainly for the `ask` command), but they are not suitable for production-level code analysis tasks.
-    
+
     Hence, for production workflows and real-world usage, we recommend using commercial models.
 
 ### Hugging Face
@@ -145,7 +145,7 @@ key = ...
 
 (you can obtain a Llama2 key from [here](https://replicate.com/replicate/llama-2-70b-chat/api))
 
-Also, review the [.secrets_template.toml](https://github.com/the-pr-agent/pr-agent/blob/main/pr_agent/settings/.secrets_template.toml) file for instructions on how to set keys for other models.
+Also, review the [.secrets_template.toml](https://github.com/the-dvmn-agent/dvmn-agent/blob/main/pr_agent/settings/.secrets_template.toml) file for instructions on how to set keys for other models.
 
 ### Groq
 
@@ -339,7 +339,7 @@ key = "..." # your Codestral api key
 To use model from Openrouter, for example, set:
 
 ```toml
-[config] # in configuration.toml 
+[config] # in configuration.toml
 model="openrouter/anthropic/claude-3.7-sonnet"
 fallback_models=["openrouter/deepseek/deepseek-chat"]
 custom_model_max_tokens=20000
@@ -352,7 +352,7 @@ key = "..." # your openrouter api key
 
 ### Custom models
 
-If the relevant model doesn't appear [here](https://github.com/the-pr-agent/pr-agent/blob/main/pr_agent/algo/__init__.py), you can still use it as a custom model:
+If the relevant model doesn't appear [here](https://github.com/the-dvmn-agent/dvmn-agent/blob/main/pr_agent/algo/__init__.py), you can still use it as a custom model:
 
 1. Set the model name in the configuration file:
 

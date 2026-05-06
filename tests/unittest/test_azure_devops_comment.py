@@ -58,4 +58,4 @@ class TestAzureDevopsProviderPublishComment(unittest.TestCase):
         # Import get_settings directly to read from configuration.toml
         status = get_settings().azure_devops.default_comment_status
         # The expected value should match what's in your configuration.toml
-        self.assertEqual(status, "closed")        
+        self.assertEqual(status, "closed")

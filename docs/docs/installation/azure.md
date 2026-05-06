@@ -28,7 +28,7 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     container:
-      image: pragent/pr-agent:latest
+      image: pragent/dvmn-agent:latest
       options: --entrypoint ""
     variables:
       - group: pr_agent
@@ -47,9 +47,9 @@ stages:
         export azure_devops__org="$ORG_URL"
         export config__git_provider="azure"
 
-        pr-agent --pr_url="$PR_URL" describe
-        pr-agent --pr_url="$PR_URL" review
-        pr-agent --pr_url="$PR_URL" improve
+        dvmn-agent --pr_url="$PR_URL" describe
+        dvmn-agent --pr_url="$PR_URL" review
+        dvmn-agent --pr_url="$PR_URL" improve
       env:
         azure_devops__pat: $(azure_devops_pat)
         openai__key: $(OPENAI_KEY)
@@ -63,7 +63,7 @@ Note that you need to export the `azure_devops__pat` and `OPENAI_KEY` variables 
 
 Make sure to give pipeline permissions to the `pr_agent` variable group.
 
-> Note that Azure Pipelines lacks support for triggering workflows from PR comments. If you find a viable solution, please contribute it to our [issue tracker](https://github.com/the-pr-agent/pr-agent/issues)
+> Note that Azure Pipelines lacks support for triggering workflows from PR comments. If you find a viable solution, please contribute it to our [issue tracker](https://github.com/the-dvmn-agent/dvmn-agent/issues)
 
 ### Azure Repos Git PR triggers and Build Validation
 

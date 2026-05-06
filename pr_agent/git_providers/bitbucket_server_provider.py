@@ -1,14 +1,13 @@
 import difflib
 import re
-
-from packaging.version import parse as parse_version
+import shlex
+import subprocess
 from typing import Optional, Tuple
 from urllib.parse import quote_plus, urlparse
 
 from atlassian.bitbucket import Bitbucket
+from packaging.version import parse as parse_version
 from requests.exceptions import HTTPError
-import shlex
-import subprocess
 
 from ..algo.file_filter import filter_ignored
 from ..algo.git_patch_processing import decode_if_bytes
@@ -48,7 +47,7 @@ class BitbucketServerProvider(GitProvider):
             self.bitbucket_server_url = self._parse_bitbucket_server(pr_url)
             if not self.bitbucket_server_url:
                 raise ValueError("Invalid or missing Bitbucket Server URL parsed from PR URL.")
-            
+
             if self.bearer_token:  # if bearer token is provided, use it
                 self.bitbucket_client = Bitbucket(
                     url=self.bitbucket_server_url,

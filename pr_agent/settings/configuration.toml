@@ -222,13 +222,13 @@ ratelimit_retries = 5
 base_url = "https://api.github.com"
 publish_inline_comments_fallback_with_verification = true
 try_fix_invalid_inline_comments = true
-app_name = "pr-agent"
+app_name = "dvmn-agent"
 ignore_bot_pr = true
 
 [github_action_config]
-# auto_review = true    # set as env var in .github/workflows/pr-agent.yaml
-# auto_describe = true  # set as env var in .github/workflows/pr-agent.yaml
-# auto_improve = true   # set as env var in .github/workflows/pr-agent.yaml
+# auto_review = true    # set as env var in .github/workflows/dvmn-agent.yaml
+# auto_describe = true  # set as env var in .github/workflows/dvmn-agent.yaml
+# auto_improve = true   # set as env var in .github/workflows/dvmn-agent.yaml
 # pr_actions = ['opened', 'reopened', 'ready_for_review', 'review_requested']
 
 [github_app]

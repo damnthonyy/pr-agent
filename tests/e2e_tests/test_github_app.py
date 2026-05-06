@@ -6,14 +6,10 @@ from datetime import datetime
 from pr_agent.config_loader import get_settings
 from pr_agent.git_providers import get_git_provider
 from pr_agent.log import get_logger, setup_logger
-from tests.e2e_tests.e2e_utils import (
-    FILE_PATH,
-    IMPROVE_START_WITH_REGEX_PATTERN,
-    NEW_FILE_CONTENT,
-    NUM_MINUTES,
-    PR_HEADER_START_WITH,
-    REVIEW_START_WITH,
-)
+from tests.e2e_tests.e2e_utils import (FILE_PATH,
+                                       IMPROVE_START_WITH_REGEX_PATTERN,
+                                       NEW_FILE_CONTENT, NUM_MINUTES,
+                                       PR_HEADER_START_WITH, REVIEW_START_WITH)
 
 log_level = os.environ.get("LOG_LEVEL", "INFO")
 setup_logger(log_level)
@@ -23,13 +19,13 @@ logger = get_logger()
 def test_e2e_run_github_app():
     """
     What we want to do:
-    (1) open a PR in a repo 'https://github.com/Codium-ai/pr-agent-tests'
+    (1) open a PR in a repo 'https://github.com/Codium-ai/dvmn-agent-tests'
     (2) wait for 5 minutes until the PR is processed by the GitHub app
     (3) check that the relevant tools have been executed
     """
     base_branch = "main"  # or any base branch you want
     new_branch = f"github_app_e2e_test-{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}"
-    repo_url = 'Codium-ai/pr-agent-tests'
+    repo_url = 'Codium-ai/dvmn-agent-tests'
     get_settings().config.git_provider = "github"
     git_provider = get_git_provider()()
     github_client = git_provider.github_client

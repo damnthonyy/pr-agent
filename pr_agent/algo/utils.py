@@ -1276,7 +1276,7 @@ def show_relevant_configurations(relevant_section: str) -> str:
 
     markdown_text = ""
     markdown_text += "\n<hr>\n<details> <summary><strong>🛠️ Relevant configurations:</strong></summary> \n\n"
-    markdown_text +="<br>These are the relevant [configurations](https://github.com/Codium-ai/pr-agent/blob/main/pr_agent/settings/configuration.toml) for this tool:\n\n"
+    markdown_text +="<br>These are the relevant [configurations](https://github.com/Codium-ai/dvmn-agent/blob/main/pr_agent/settings/configuration.toml) for this tool:\n\n"
     markdown_text += f"**[config**]\n```yaml\n\n"
     for key, value in get_settings().config.items():
         if key in skip_keys:
@@ -1433,9 +1433,9 @@ def get_version() -> str:
 
     # Otherwise get the installed pip package version
     try:
-        return version('pr-agent')
+        return version('dvmn-agent')
     except PackageNotFoundError:
-        get_logger().warning("Unable to find package named 'pr-agent'")
+        get_logger().warning("Unable to find package named 'dvmn-agent'")
         return "unknown"
 
 

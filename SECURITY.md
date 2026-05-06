@@ -27,13 +27,13 @@ This section outlines which versions of PR-Agent are currently supported with se
 For the most recent updates, use our latest Docker image which is automatically built nightly:
 
 ```yaml
-uses: qodo-ai/pr-agent@main
+uses: qodo-ai/dvmn-agent@main
 ```
 
 #### Specific Release Version
 
 For a fixed version, you can pin your action to a specific release version. Browse available releases at:
-[PR-Agent Releases](https://github.com/qodo-ai/pr-agent/releases)
+[PR-Agent Releases](https://github.com/qodo-ai/dvmn-agent/releases)
 
 For example, to github action:
 
@@ -41,7 +41,7 @@ For example, to github action:
 steps:
   - name: PR Agent action step
     id: pragent
-    uses: docker://pragent/pr-agent:0.34.2-github_action
+    uses: docker://pragent/dvmn-agent:0.34.2-github_action
 ```
 
 #### Enhanced Security with Docker Digest
@@ -52,7 +52,7 @@ For maximum security, you can specify the Docker image using its digest:
 steps:
   - name: PR Agent action step
     id: pragent
-    uses: docker://pragent/pr-agent@sha256:a0b36966ca3a197ca739fa1e65c16703076fc1c744cd423ca203b8c21707d71c
+    uses: docker://pragent/dvmn-agent@sha256:a0b36966ca3a197ca739fa1e65c16703076fc1c744cd423ca203b8c21707d71c
 ```
 
 ## Reporting a Vulnerability

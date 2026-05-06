@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: PR Agent action step
         id: pragent
-        uses: the-pr-agent/pr-agent@main
+        uses: the-dvmn-agent/dvmn-agent@main
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -41,7 +41,7 @@ The GITHUB_TOKEN secret is automatically created by GitHub.
 3) Merge this change to your main branch.
 When you open your next PR, you should see a comment from `github-actions` bot with a review of your PR, and instructions on how to use the rest of the tools.
 
-4) You may configure PR-Agent by adding environment variables under the env section corresponding to any configurable property in the [configuration](https://github.com/the-pr-agent/pr-agent/blob/main/pr_agent/settings/configuration.toml) file. Some examples:
+4) You may configure PR-Agent by adding environment variables under the env section corresponding to any configurable property in the [configuration](https://github.com/the-dvmn-agent/dvmn-agent/blob/main/pr_agent/settings/configuration.toml) file. Some examples:
 
 ```yaml
       env:
@@ -79,7 +79,7 @@ jobs:
       contents: write
     steps:
       - name: PR Agent action step
-        uses: the-pr-agent/pr-agent@main
+        uses: the-dvmn-agent/dvmn-agent@main
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -105,7 +105,7 @@ jobs:
       contents: write
     steps:
       - name: PR Agent action step
-        uses: the-pr-agent/pr-agent@main
+        uses: the-dvmn-agent/dvmn-agent@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           config.model: "gemini/gemini-1.5-flash"
@@ -136,7 +136,7 @@ jobs:
       contents: write
     steps:
       - name: PR Agent action step
-        uses: the-pr-agent/pr-agent@main
+        uses: the-dvmn-agent/dvmn-agent@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           config.model: "anthropic/claude-3-opus-20240229"
@@ -168,7 +168,7 @@ jobs:
     steps:
       - name: PR Agent action step
         id: pragent
-        uses: the-pr-agent/pr-agent@main
+        uses: the-dvmn-agent/dvmn-agent@main
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -370,7 +370,7 @@ jobs:
     steps:
       - name: PR Agent action step
         id: pragent
-        uses: the-pr-agent/pr-agent@main
+        uses: the-dvmn-agent/dvmn-agent@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GOOGLE_AI_STUDIO.GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -493,17 +493,17 @@ For more detailed configuration options, see:
         steps:
           - name: PR Agent action step
             id: pragent
-            uses: docker://pragent/pr-agent:0.34.2-github_action
+            uses: docker://pragent/dvmn-agent:0.34.2-github_action
     ...
     ```
 
-    For enhanced security, you can also specify the Docker image by its [digest](https://hub.docker.com/repository/docker/pragent/pr-agent/tags):
+    For enhanced security, you can also specify the Docker image by its [digest](https://hub.docker.com/repository/docker/pragent/dvmn-agent/tags):
     ```yaml
     ...
         steps:
           - name: PR Agent action step
             id: pragent
-            uses: docker://pragent/pr-agent@sha256:a0b36966ca3a197ca739fa1e65c16703076fc1c744cd423ca203b8c21707d71c
+            uses: docker://pragent/dvmn-agent@sha256:a0b36966ca3a197ca739fa1e65c16703076fc1c744cd423ca203b8c21707d71c
     ...
     ```
 
@@ -551,7 +551,7 @@ WEBHOOK_SECRET=$(python -c "import secrets; print(secrets.token_hex(10))")
 4) Clone this repository:
 
 ```bash
-git clone https://github.com/the-pr-agent/pr-agent.git
+git clone https://github.com/the-dvmn-agent/dvmn-agent.git
 ```
 
 5) Copy the secrets template file and fill in the following:
@@ -565,19 +565,19 @@ cp pr_agent/settings/.secrets_template.toml pr_agent/settings/.secrets.toml
 - Copy your app's private key to the private_key field.
 - Copy your app's ID to the app_id field.
 - Copy your app's webhook secret to the webhook_secret field.
-- Set deployment_type to 'app' in [configuration.toml](https://github.com/the-pr-agent/pr-agent/blob/main/pr_agent/settings/configuration.toml)
+- Set deployment_type to 'app' in [configuration.toml](https://github.com/the-dvmn-agent/dvmn-agent/blob/main/pr_agent/settings/configuration.toml)
 
     > The .secrets.toml file is not copied to the Docker image by default, and is only used for local development.
     > If you want to use the .secrets.toml file in your Docker image, you can add remove it from the .dockerignore file.
     > In most production environments, you would inject the secrets file as environment variables or as mounted volumes.
     > For example, in order to inject a secrets file as a volume in a Kubernetes environment you can update your pod spec to include the following,
-    > assuming you have a secret named `pr-agent-settings` with a key named `.secrets.toml`:
+    > assuming you have a secret named `dvmn-agent-settings` with a key named `.secrets.toml`:
 
     ```
            volumes:
             - name: settings-volume
               secret:
-                secretName: pr-agent-settings
+                secretName: dvmn-agent-settings
     // ...
            containers:
     // ...
@@ -591,8 +591,8 @@ cp pr_agent/settings/.secrets_template.toml pr_agent/settings/.secrets.toml
 6) Build a Docker image for the app and optionally push it to a Docker repository. We'll use Dockerhub as an example:
 
     ```bash
-    docker build . -t pragent/pr-agent:github_app --target github_app -f docker/Dockerfile
-    docker push pragent/pr-agent:github_app  # Push to your Docker repository
+    docker build . -t pragent/dvmn-agent:github_app --target github_app -f docker/Dockerfile
+    docker push pragent/dvmn-agent:github_app  # Push to your Docker repository
     ```
 
 7. Host the app using a server, serverless function, or container environment. Alternatively, for development and
@@ -622,7 +622,7 @@ For example: `GITHUB.WEBHOOK_SECRET` --> `GITHUB__WEBHOOK_SECRET`
 2. Build a docker image that can be used as a lambda function
 
     ```shell
-    docker buildx build --platform=linux/amd64 . -t pragent/pr-agent:github_lambda --target github_lambda -f docker/Dockerfile.lambda
+    docker buildx build --platform=linux/amd64 . -t pragent/dvmn-agent:github_lambda --target github_lambda -f docker/Dockerfile.lambda
    ```
    (Note: --target github_lambda is optional as it's the default target)
 
@@ -630,13 +630,13 @@ For example: `GITHUB.WEBHOOK_SECRET` --> `GITHUB__WEBHOOK_SECRET`
 3. Push image to ECR
 
     ```shell
-    docker tag pragent/pr-agent:github_lambda <AWS_ACCOUNT>.dkr.ecr.<AWS_REGION>.amazonaws.com/pragent/pr-agent:github_lambda
-    docker push <AWS_ACCOUNT>.dkr.ecr.<AWS_REGION>.amazonaws.com/pragent/pr-agent:github_lambda
+    docker tag pragent/dvmn-agent:github_lambda <AWS_ACCOUNT>.dkr.ecr.<AWS_REGION>.amazonaws.com/pragent/dvmn-agent:github_lambda
+    docker push <AWS_ACCOUNT>.dkr.ecr.<AWS_REGION>.amazonaws.com/pragent/dvmn-agent:github_lambda
     ```
 
 4. Create a lambda function that uses the uploaded image. Set the lambda timeout to be at least 3m.
 5. Configure the lambda function to have a Function URL.
-6. In the environment variables of the Lambda function, specify `AZURE_DEVOPS_CACHE_DIR` to a writable location such as /tmp. (see [link](https://github.com/the-pr-agent/pr-agent/pull/450#issuecomment-1840242269))
+6. In the environment variables of the Lambda function, specify `AZURE_DEVOPS_CACHE_DIR` to a writable location such as /tmp. (see [link](https://github.com/the-dvmn-agent/dvmn-agent/pull/450#issuecomment-1840242269))
 7. Go back to steps 8-9 of [Method 5](#run-as-a-github-app) with the function url as your Webhook URL.
     The Webhook URL would look like `https://<LAMBDA_FUNCTION_URL>/api/v1/github_webhooks`
 
@@ -658,7 +658,7 @@ For production Lambda deployments, use AWS Secrets Manager instead of environmen
 3. Set these environment variables in your Lambda:
 
 ```bash
-AWS_SECRETS_MANAGER__SECRET_ARN=arn:aws:secretsmanager:us-east-1:123456789012:secret:pr-agent-secrets-AbCdEf
+AWS_SECRETS_MANAGER__SECRET_ARN=arn:aws:secretsmanager:us-east-1:123456789012:secret:dvmn-agent-secrets-AbCdEf
 CONFIG__SECRET_PROVIDER=aws_secrets_manager
 ```
 
@@ -674,10 +674,10 @@ Not all features have been added to CodeCommit yet.  As of right now, CodeCommit
 3. Generate an Access Key for your IAM user
 4. Set the Access Key and Secret using environment variables (see Access Key example below)
 5. Set the `git_provider` value to `codecommit` in the `pr_agent/settings/configuration.toml` settings file
-6. Set the `PYTHONPATH` to include your `pr-agent` project directory
-    - Option A: Add `PYTHONPATH="/PATH/TO/PROJECTS/pr-agent` to your `.env` file
+6. Set the `PYTHONPATH` to include your `dvmn-agent` project directory
+    - Option A: Add `PYTHONPATH="/PATH/TO/PROJECTS/dvmn-agent` to your `.env` file
     - Option B: Set `PYTHONPATH` and run the CLI in one command, for example:
-        - `PYTHONPATH="/PATH/TO/PROJECTS/pr-agent python pr_agent/cli.py [--ARGS]`
+        - `PYTHONPATH="/PATH/TO/PROJECTS/dvmn-agent python pr_agent/cli.py [--ARGS]`
 
 ---
 
@@ -686,7 +686,7 @@ Not all features have been added to CodeCommit yet.  As of right now, CodeCommit
 Example IAM permissions to that user to allow access to CodeCommit:
 
 - Note: The following is a working example of IAM permissions that has read access to the repositories and write access to allow posting comments
-- Note: If you only want pr-agent to review your pull requests, you can tighten the IAM permissions further, however this IAM example will work, and allow the pr-agent to post comments to the PR
+- Note: If you only want dvmn-agent to review your pull requests, you can tighten the IAM permissions further, however this IAM example will work, and allow the dvmn-agent to post comments to the PR
 - Note: You may want to replace the `"Resource": "*"` with your list of repos, to limit access to only those repos
 
 ```json
@@ -725,11 +725,11 @@ export AWS_DEFAULT_REGION="us-east-1"
 
 ##### AWS CodeCommit CLI Example
 
-After you set up AWS CodeCommit using the instructions above, here is an example CLI run that tells pr-agent to **review** a given pull request.
+After you set up AWS CodeCommit using the instructions above, here is an example CLI run that tells dvmn-agent to **review** a given pull request.
 (Replace your specific PYTHONPATH and PR URL in the example)
 
 ```sh
-PYTHONPATH="/PATH/TO/PROJECTS/pr-agent" python pr_agent/cli.py \
+PYTHONPATH="/PATH/TO/PROJECTS/dvmn-agent" python pr_agent/cli.py \
   --pr_url https://us-east-1.console.aws.amazon.com/codesuite/codecommit/repositories/MY_REPO_NAME/pull-requests/321 \
   review
 ```
