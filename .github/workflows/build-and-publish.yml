@@ -36,7 +36,7 @@ jobs:
           context: .
           file: docker/Dockerfile
           target: github_app
-          push: $${{ github.event_name == 'push' && github.ref == 'refs/heads/prod' }}
+          push: true
           platforms: linux/amd64,linux/arm64
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/dvmn-agent:prod
