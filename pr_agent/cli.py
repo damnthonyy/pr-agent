@@ -41,7 +41,7 @@ def set_parser():
     - add_docs
 
     - generate_labels
-    
+
     - help_docs - Ask a question, from either an issue or PR context, on a given repo (current context or a different one)
 
 
@@ -49,7 +49,7 @@ def set_parser():
     To edit any configuration parameter from 'configuration.toml', just add -config_path=<value>.
     For example: 'python cli.py --pr_url=... review --pr_reviewer.extra_instructions="focus on the file: ..."'
     """)
-    parser.add_argument('--version', action='version', version=f'pr-agent {get_version()}')
+    parser.add_argument('--version', action='version', version=f'dvmn-agent {get_version()}')
     parser.add_argument('--pr_url', type=str, help='The URL of the PR to review', default=None)
     parser.add_argument('--issue_url', type=str, help='The URL of the Issue to review', default=None)
     parser.add_argument('command', type=str, help='The', choices=commands, default='review')

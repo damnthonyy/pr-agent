@@ -711,9 +711,9 @@ class GiteaProvider(GitProvider):
     #Clone related
     def _prepare_clone_url_with_token(self, repo_url_to_clone: str) -> str | None:
         #For example, to clone:
-        #https://github.com/Codium-ai/pr-agent-pro.git
+        #https://github.com/Codium-ai/dvmn-agent-pro.git
         #Need to embed inside the github token:
-        #https://<token>@github.com/Codium-ai/pr-agent-pro.git
+        #https://<token>@github.com/Codium-ai/dvmn-agent-pro.git
 
         gitea_token = self.gitea_access_token
         gitea_base_url = self.base_url

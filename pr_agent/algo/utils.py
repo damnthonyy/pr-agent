@@ -697,21 +697,6 @@ def load_large_diff(filename, new_file_content_str: str, original_file_content_s
         if get_settings().config.verbosity_level >= 2 and show_warning:
             get_logger().info(f"File was modified, but no patch was found. Manually creating patch: {filename}.")
         patch = ''.join(diff)
-        # normalize unified diff headers: difflib may emit '--- ' and '+++ ' when filenames are empty
-        # Historically tests expect either the space to be present or absent depending on hunk header style
-        if patch:
-            lines = patch.splitlines(keepends=True)
-            # find first hunk header line (starts with '@@') to decide normalization
-            hunk_idx = next((i for i, l in enumerate(lines) if l.startswith('@@')), None)
-            if hunk_idx is not None:
-                hunk_line = lines[hunk_idx]
-                # if hunk header contains a comma (range with size, e.g. '-1,3'), remove trailing space
-                if ',' in hunk_line:
-                    if len(lines) >= 1 and lines[0] == '--- \n':
-                        lines[0] = '---\n'
-                    if len(lines) >= 2 and lines[1] == '+++ \n':
-                        lines[1] = '+++\n'
-            patch = ''.join(lines)
         return patch
     except Exception as e:
         get_logger().exception(f"Failed to generate patch for file: {filename}")

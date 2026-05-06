@@ -1,6 +1,7 @@
 import pytest
 
-from pr_agent.tools.ticket_pr_compliance_check import extract_ticket_links_from_branch_name
+from pr_agent.tools.ticket_pr_compliance_check import \
+    extract_ticket_links_from_branch_name
 
 
 class TestExtractTicketsLinkFromBranchName:

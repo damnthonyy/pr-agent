@@ -12,7 +12,7 @@ To invoke a tool (for example `review`), you can run PR-Agent directly from the 
 - For GitHub:
 
     ```bash
-    docker run --rm -it -e OPENAI.KEY=<your_openai_key> -e GITHUB.USER_TOKEN=<your_github_token> pragent/pr-agent:latest --pr_url <pr_url> review
+    docker run --rm -it -e OPENAI.KEY=<your_openai_key> -e GITHUB.USER_TOKEN=<your_github_token> pragent/dvmn-agent:latest --pr_url <pr_url> review
     ```
 
     If you are using GitHub enterprise server, you need to specify the custom url as variable.
@@ -25,7 +25,7 @@ To invoke a tool (for example `review`), you can run PR-Agent directly from the 
 - For GitLab:
 
     ```bash
-    docker run --rm -it -e OPENAI.KEY=<your key> -e CONFIG.GIT_PROVIDER=gitlab -e GITLAB.PERSONAL_ACCESS_TOKEN=<your token> pragent/pr-agent:latest --pr_url <pr_url> review
+    docker run --rm -it -e OPENAI.KEY=<your key> -e CONFIG.GIT_PROVIDER=gitlab -e GITLAB.PERSONAL_ACCESS_TOKEN=<your token> pragent/dvmn-agent:latest --pr_url <pr_url> review
     ```
 
     If you have a dedicated GitLab instance, you need to specify the custom url as variable:
@@ -37,13 +37,13 @@ To invoke a tool (for example `review`), you can run PR-Agent directly from the 
 - For BitBucket:
 
     ```bash
-    docker run --rm -it -e CONFIG.GIT_PROVIDER=bitbucket -e OPENAI.KEY=$OPENAI_API_KEY -e BITBUCKET.BEARER_TOKEN=$BITBUCKET_BEARER_TOKEN pragent/pr-agent:latest --pr_url=<pr_url> review
+    docker run --rm -it -e CONFIG.GIT_PROVIDER=bitbucket -e OPENAI.KEY=$OPENAI_API_KEY -e BITBUCKET.BEARER_TOKEN=$BITBUCKET_BEARER_TOKEN pragent/dvmn-agent:latest --pr_url=<pr_url> review
     ```
 
 - For Gitea:
 
     ```bash
-    docker run --rm -it -e OPENAI.KEY=<your key> -e CONFIG.GIT_PROVIDER=gitea -e GITEA.PERSONAL_ACCESS_TOKEN=<your token> pragent/pr-agent:latest --pr_url <pr_url> review
+    docker run --rm -it -e OPENAI.KEY=<your key> -e CONFIG.GIT_PROVIDER=gitea -e GITEA.PERSONAL_ACCESS_TOKEN=<your token> pragent/dvmn-agent:latest --pr_url <pr_url> review
     ```
 
     If you have a dedicated Gitea instance, you need to specify the custom url as variable:
@@ -53,7 +53,7 @@ To invoke a tool (for example `review`), you can run PR-Agent directly from the 
     ```
 
 
-For other git providers, update `CONFIG.GIT_PROVIDER` accordingly and check the [`pr_agent/settings/.secrets_template.toml`](https://github.com/the-pr-agent/pr-agent/blob/main/pr_agent/settings/.secrets_template.toml) file for environment variables expected names and values.
+For other git providers, update `CONFIG.GIT_PROVIDER` accordingly and check the [`pr_agent/settings/.secrets_template.toml`](https://github.com/the-dvmn-agent/dvmn-agent/blob/main/pr_agent/settings/.secrets_template.toml) file for environment variables expected names and values.
 
 ### Utilizing environment variables
 
@@ -74,7 +74,7 @@ OPENAI__KEY="<your key>"
 Then, you can run `pr_agent` using Docker with the following command:
 
 ```shell
-docker run --rm -it --env-file .env pragent/pr-agent:latest <tool> <tool parameter>
+docker run --rm -it --env-file .env pragent/dvmn-agent:latest <tool> <tool parameter>
 ```
 
 ---
@@ -83,7 +83,7 @@ docker run --rm -it --env-file .env pragent/pr-agent:latest <tool> <tool paramet
 
 If you encounter an error when running the Docker image, it is almost always due to a misconfiguration of api keys or tokens.
 
-Note that litellm, which is used by pr-agent, sometimes returns non-informative error messages such as `APIError: OpenAIException - Connection error.`
+Note that litellm, which is used by dvmn-agent, sometimes returns non-informative error messages such as `APIError: OpenAIException - Connection error.`
 Carefully check the api keys and tokens you provided and make sure they are correct.
 Adjustments may be needed depending on your llm provider.
 
@@ -95,7 +95,7 @@ Same goes for other providers, make sure to check the [documentation](../usage-g
 Install the package:
 
 ```bash
-pip install pr-agent
+pip install dvmn-agent
 ```
 
 Then run the relevant tool with the script below.
@@ -111,7 +111,7 @@ def main():
     provider = "github" # github/gitlab/bitbucket/azure_devops
     user_token = "..."  #  user token
     openai_key = "..."  # OpenAI key
-    pr_url = "..."      # PR URL, for example 'https://github.com/the-pr-agent/pr-agent/pull/809'
+    pr_url = "..."      # PR URL, for example 'https://github.com/the-dvmn-agent/dvmn-agent/pull/809'
     command = "/review" # Command to run (e.g. '/review', '/describe', '/ask="What is the purpose of this PR?"', ...)
 
     # Setting the configurations
@@ -132,10 +132,10 @@ if __name__ == '__main__':
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/the-pr-agent/pr-agent.git
+git clone https://github.com/the-dvmn-agent/dvmn-agent.git
 ```
 
-2. Navigate to the `/pr-agent` folder and install the requirements in your favorite virtual environment:
+2. Navigate to the `/dvmn-agent` folder and install the requirements in your favorite virtual environment:
 
 ```bash
 pip install -e .

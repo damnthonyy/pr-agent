@@ -5,7 +5,7 @@ from typing import Optional
 from dynaconf import Dynaconf
 from starlette_context import context
 
-PR_AGENT_TOML_KEY = 'pr-agent'
+PR_AGENT_TOML_KEY = 'dvmn-agent'
 
 current_dir = dirname(abspath(__file__))
 
@@ -97,8 +97,8 @@ def apply_secrets_manager_config():
     """
     try:
         # Dynamic imports to avoid circular dependency (secret_providers imports config_loader)
-        from pr_agent.secret_providers import get_secret_provider
         from pr_agent.log import get_logger
+        from pr_agent.secret_providers import get_secret_provider
 
         secret_provider = get_secret_provider()
         if not secret_provider:
