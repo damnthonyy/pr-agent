@@ -1,6 +1,7 @@
 import argparse
 import asyncio
 import os
+from textwrap import dedent
 
 from pr_agent.agent.pr_agent import PRAgent, commands
 from pr_agent.algo.utils import get_version
@@ -12,43 +13,48 @@ setup_logger(log_level)
 
 
 def set_parser():
-    parser = argparse.ArgumentParser(description='AI based pull request analyzer', usage=
-    """\
-    Usage: cli.py --pr_url=<URL on supported git hosting service> <command> [<args>].
-    For example:
-    - cli.py --pr_url=... review
-    - cli.py --pr_url=... describe
-    - cli.py --pr_url=... improve
-    - cli.py --pr_url=... ask "write me a poem about this PR"
-    - cli.py --pr_url=... reflect
-    - cli.py --issue_url=... similar_issue
-    - cli.py --pr_url/--issue_url= help_docs [<asked question>]
+    parser = argparse.ArgumentParser(
+        prog='dvmn-agent',
+        description='AI based pull request analyzer',
+        usage=dedent(
+        """\
+        dvmn-agent --pr_url=<URL on supported git hosting service> <command> [<args>].
+        For example:
+        - dvmn-agent --pr_url=... review
+        - dvmn-agent --pr_url=... describe
+        - dvmn-agent --pr_url=... improve
+        - dvmn-agent --pr_url=... ask "write me a poem about this PR"
+        - dvmn-agent --pr_url=... reflect
+        - dvmn-agent --issue_url=... similar_issue
+        - dvmn-agent --pr_url/--issue_url= help_docs [<asked question>]
 
-    Supported commands:
-    - review / review_pr - Add a review that includes a summary of the PR and specific suggestions for improvement.
+        Supported commands:
+        - review / review_pr - Add a review that includes a summary of the PR and specific suggestions for improvement.
 
-    - ask / ask_question [question] - Ask a question about the PR.
+        - ask / ask_question [question] - Ask a question about the PR.
 
-    - describe / describe_pr - Modify the PR title and description based on the PR's contents.
+        - describe / describe_pr - Modify the PR title and description based on the PR's contents.
 
-    - improve / improve_code - Suggest improvements to the code in the PR as pull request comments ready to commit.
-    Extended mode ('improve --extended') employs several calls, and provides a more thorough feedback
+        - improve / improve_code - Suggest improvements to the code in the PR as pull request comments ready to commit.
+        Extended mode ('improve --extended') employs several calls, and provides a more thorough feedback
 
-    - reflect - Ask the PR author questions about the PR.
+        - reflect - Ask the PR author questions about the PR.
 
-    - update_changelog - Update the changelog based on the PR's contents.
+        - update_changelog - Update the changelog based on the PR's contents.
 
-    - add_docs
+        - add_docs
 
-    - generate_labels
+        - generate_labels
 
-    - help_docs - Ask a question, from either an issue or PR context, on a given repo (current context or a different one)
+        - help_docs - Ask a question, from either an issue or PR context, on a given repo (current context or a different one)
 
 
-    Configuration:
-    To edit any configuration parameter from 'configuration.toml', just add -config_path=<value>.
-    For example: 'python cli.py --pr_url=... review --pr_reviewer.extra_instructions="focus on the file: ..."'
-    """)
+        Configuration:
+        To edit any configuration parameter from 'configuration.toml', just add -config_path=<value>.
+        For example: 'dvmn-agent --pr_url=... review --pr_reviewer.extra_instructions="focus on the file: ..."'
+        """
+        ),
+    )
     parser.add_argument('--version', action='version', version=f'dvmn-agent {get_version()}')
     parser.add_argument('--pr_url', type=str, help='The URL of the PR to review', default=None)
     parser.add_argument('--issue_url', type=str, help='The URL of the Issue to review', default=None)
