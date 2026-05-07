@@ -6,7 +6,7 @@ particularly for the GitLab credentials use case where values should be reloaded
 on each access rather than being cached.
 
 The tests are designed to detect if fresh_vars is broken due to custom loader changes,
-such as those introduced in https://github.com/qodo-ai/pr-agent/pull/2087.
+such as those introduced in https://github.com/qodo-ai/dvmn-agent/pull/2087.
 """
 
 import os
@@ -33,7 +33,7 @@ def create_dynaconf_with_custom_loader(temp_dir, secrets_file):
     - merge_enabled = True
 
     Note: fresh_vars should be configured via FRESH_VARS_FOR_DYNACONF environment variable,
-    which is the only way to configure it in pr-agent.
+    which is the only way to configure it in dvmn-agent.
 
     Args:
         temp_dir: Temporary directory path
@@ -101,7 +101,7 @@ shared_secret = "{shared_secret}"
         # Create initial secrets file
         self.create_secrets_toml(personal_access_token="token_v1", shared_secret="secret_v1")
 
-        # Set FRESH_VARS_FOR_DYNACONF environment variable (the only way to configure fresh_vars in pr-agent)
+        # Set FRESH_VARS_FOR_DYNACONF environment variable (the only way to configure fresh_vars in dvmn-agent)
         with patch.dict(os.environ, {"FRESH_VARS_FOR_DYNACONF": '["GITLAB"]'}):
             # Create Dynaconf with GITLAB marked as fresh via env var
             settings = create_dynaconf_with_custom_loader(self.temp_dir, self.secrets_file)

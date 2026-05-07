@@ -31,7 +31,7 @@ class PRSimilarIssue:
         self.token_handler = TokenHandler()
         repo_obj = self.git_provider.repo_obj
         repo_name_for_index = self.repo_name_for_index = repo_obj.full_name.lower().replace('/', '-').replace('_/', '-')
-        index_name = self.index_name = "codium-ai-pr-agent-issues"
+        index_name = self.index_name = "codium-ai-dvmn-agent-issues"
 
         if get_settings().pr_similar_issue.vectordb == "pinecone":
             try:
@@ -262,7 +262,8 @@ class PRSimilarIssue:
             message = "The /similar_issue tool is currently supported only for GitHub."
             if get_settings().config.publish_output:
                 try:
-                    from pr_agent.git_providers import get_git_provider_with_context
+                    from pr_agent.git_providers import \
+                        get_git_provider_with_context
 
                     provider = get_git_provider_with_context(self.issue_url)
                     provider.publish_comment(message)

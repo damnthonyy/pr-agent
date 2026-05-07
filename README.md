@@ -14,16 +14,16 @@
 <br>
 The Original Open-Source PR Reviewer
 <br><br>
-<a href="https://github.com/the-pr-agent/pr-agent/commits/main">
-<img alt="GitHub" src="https://img.shields.io/github/last-commit/the-pr-agent/pr-agent/main?style=for-the-badge" height="20">
+<a href="https://github.com/the-dvmn-agent/dvmn-agent/commits/main">
+<img alt="GitHub" src="https://img.shields.io/github/last-commit/the-dvmn-agent/dvmn-agent/main?style=for-the-badge" height="20">
 </a>
 </div>
 
 ---
 
- This repository contains the open-source PR Agent Project. 
+ This repository contains the open-source PR Agent Project.
  It is not the Qodo free tier.
- 
+
 Try the free version on our website.
 
 👉[Get Started Now](https://www.qodo.ai/get-started/)
@@ -39,15 +39,15 @@ After years of building this tool alongside the community, Qodo has donated PR-A
 
 The project now lives in the PR-Agent org on GitHub, is fully community-owned, and is open for contributions and additional maintainers.
 
-What else changed: 
-- Docs moved to - www.pr-agent.ai
+What else changed:
+- Docs moved to - www.dvmn-agent.ai
 - Qodo Merge (Qodo 1.0), the hosted URL, which was the enterprise version of PR-Agent, has been rebranded and evolved into Qodo (Qodo 2.0), a full AI code review platform.
 
 
 ## Table of Contents
 
 - [Getting Started](#getting-started)
-- [Why Use PR-Agent?](#why-use-pr-agent)
+- [Why Use PR-Agent?](#why-use-dvmn-agent)
 - [Features](#features)
 - [See It in Action](#see-it-in-action)
 - [How It Works](#how-it-works)
@@ -57,14 +57,14 @@ What else changed:
 ## Getting Started
 
 > [!NOTE]
-> **Docker Hub namespace migration.** Releases `0.34.2` and later are published under [`pragent/pr-agent`](https://hub.docker.com/r/pragent/pr-agent). Older releases (up to and including `v0.31`) remain available at the legacy [`codiumai/pr-agent`](https://hub.docker.com/r/codiumai/pr-agent) namespace as a frozen archive — no new images are pushed there. Update any pinned `image:` / `docker pull` / `uses: docker://` references when upgrading to `0.34.2+`.
+> **Docker Hub namespace migration.** Releases `0.34.2` and later are published under [`pragent/dvmn-agent`](https://hub.docker.com/r/pragent/dvmn-agent). Older releases (up to and including `v0.31`) remain available at the legacy [`codiumai/dvmn-agent`](https://hub.docker.com/r/codiumai/dvmn-agent) namespace as a frozen archive — no new images are pushed there. Update any pinned `image:` / `docker pull` / `uses: docker://` references when upgrading to `0.34.2+`.
 
 ### 🚀 Quick Start for PR-Agent
 
 #### 1. GitHub Action (Recommended)
 Add automated PR reviews to your repository with a simple workflow file:
 ```yaml
-# .github/workflows/pr-agent.yml
+# .github/workflows/dvmn-agent.yml
 name: PR Agent
 on:
   pull_request:
@@ -74,26 +74,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: PR Agent action step
-      uses: the-pr-agent/pr-agent@main
+      uses: the-dvmn-agent/dvmn-agent@main
       env:
         OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
-[Full GitHub Action setup guide](https://docs.pr-agent.ai/installation/github/#run-as-a-github-action)
+[Full GitHub Action setup guide](https://docs.dvmn-agent.ai/installation/github/#run-as-a-github-action)
 
 #### 2. CLI Usage (Local Development)
 Run PR-Agent locally on your repository:
 ```bash
-pip install pr-agent
+pip install dvmn-agent
 export OPENAI_KEY=your_key_here
-pr-agent --pr_url https://github.com/owner/repo/pull/123 review
+dvmn-agent --pr_url https://github.com/owner/repo/pull/123 review
 ```
-[Complete CLI setup guide](https://docs.pr-agent.ai/usage-guide/automations_and_usage/#local-repo-cli)
+[Complete CLI setup guide](https://docs.dvmn-agent.ai/usage-guide/automations_and_usage/#local-repo-cli)
 
 #### 3. Other Platforms
-- [GitLab webhook setup](https://docs.pr-agent.ai/installation/gitlab/)
-- [BitBucket app installation](https://docs.pr-agent.ai/installation/bitbucket/)
-- [Azure DevOps setup](https://docs.pr-agent.ai/installation/azure/)
+- [GitLab webhook setup](https://docs.dvmn-agent.ai/installation/gitlab/)
+- [BitBucket app installation](https://docs.dvmn-agent.ai/installation/bitbucket/)
+- [Azure DevOps setup](https://docs.dvmn-agent.ai/installation/azure/)
 
 [//]: # (## News and Updates)
 
@@ -112,7 +112,7 @@ pr-agent --pr_url https://github.com/owner/repo/pull/123 review
 [//]: # (## Jun 21, 2025)
 
 [//]: # ()
-[//]: # (v0.30 was [released]&#40;https://github.com/qodo-ai/pr-agent/releases&#41;)
+[//]: # (v0.30 was [released]&#40;https://github.com/qodo-ai/dvmn-agent/releases&#41;)
 
 [//]: # ()
 [//]: # ()
@@ -125,7 +125,7 @@ pr-agent --pr_url https://github.com/owner/repo/pull/123 review
 [//]: # (<img width="512" alt="image" src="https://codium.ai/images/pr_agent/improve_chat_on_code_suggestions_ask.png" />)
 
 [//]: # ()
-[//]: # (Read more about it [here]&#40;https://docs.pr-agent.ai/tools/improve/#chat-on-code-suggestions&#41;.)
+[//]: # (Read more about it [here]&#40;https://docs.dvmn-agent.ai/tools/improve/#chat-on-code-suggestions&#41;.)
 
 [//]: # ()
 [//]: # ()
@@ -136,11 +136,11 @@ pr-agent --pr_url https://github.com/owner/repo/pull/123 review
 
 **Fast & Affordable**: Each tool (`/review`, `/improve`, `/ask`) uses a single LLM call (~30 seconds, low cost)
 
-**Handles Any PR Size**: Our [PR Compression strategy](https://docs.pr-agent.ai/core-abilities/#pr-compression-strategy) effectively processes both small and large PRs
+**Handles Any PR Size**: Our [PR Compression strategy](https://docs.dvmn-agent.ai/core-abilities/#pr-compression-strategy) effectively processes both small and large PRs
 
 **Highly Customizable**: JSON-based prompting allows easy customization of review categories and behavior via [configuration files](pr_agent/settings/configuration.toml)
 
-**Platform Agnostic**: 
+**Platform Agnostic**:
 - **Git Providers**: GitHub, GitLab, BitBucket, Azure DevOps, Gitea
 - **Deployment**: CLI, GitHub Actions, Docker, self-hosted, webhooks
 - **AI Models**: OpenAI GPT, Claude, Deepseek, and more
@@ -159,27 +159,27 @@ PR-Agent offers comprehensive pull request functionalities integrated with vario
 
 |                                                         |                                                                                        | GitHub | GitLab | Bitbucket | Azure DevOps | Gitea |
 |---------------------------------------------------------|----------------------------------------------------------------------------------------|:------:|:------:|:---------:|:------------:|:-----:|
-| [TOOLS](https://docs.pr-agent.ai/tools/)         | [Describe](https://docs.pr-agent.ai/tools/describe/)                            |   ✅   |   ✅   |    ✅     |      ✅      |  ✅   |
-|                                                         | [Review](https://docs.pr-agent.ai/tools/review/)                                |   ✅   |   ✅   |    ✅     |      ✅      |  ✅   |
-|                                                         | [Improve](https://docs.pr-agent.ai/tools/improve/)                              |   ✅   |   ✅   |    ✅     |      ✅      |  ✅   |
-|                                                         | [Ask](https://docs.pr-agent.ai/tools/ask/)                                      |   ✅   |   ✅   |    ✅     |      ✅      |       |
-|                                                         | ⮑ [Ask on code lines](https://docs.pr-agent.ai/tools/ask/#ask-lines)            |   ✅   |   ✅   |           |              |       |
-|                                                         | [Help Docs](https://docs.pr-agent.ai/tools/help_docs/?h=auto#auto-approval)     |   ✅   |   ✅   |    ✅     |              |       |
-|                                                         | [Update CHANGELOG](https://docs.pr-agent.ai/tools/update_changelog/)            |   ✅   |   ✅   |    ✅     |      ✅      |       |
+| [TOOLS](https://docs.dvmn-agent.ai/tools/)         | [Describe](https://docs.dvmn-agent.ai/tools/describe/)                            |   ✅   |   ✅   |    ✅     |      ✅      |  ✅   |
+|                                                         | [Review](https://docs.dvmn-agent.ai/tools/review/)                                |   ✅   |   ✅   |    ✅     |      ✅      |  ✅   |
+|                                                         | [Improve](https://docs.dvmn-agent.ai/tools/improve/)                              |   ✅   |   ✅   |    ✅     |      ✅      |  ✅   |
+|                                                         | [Ask](https://docs.dvmn-agent.ai/tools/ask/)                                      |   ✅   |   ✅   |    ✅     |      ✅      |       |
+|                                                         | ⮑ [Ask on code lines](https://docs.dvmn-agent.ai/tools/ask/#ask-lines)            |   ✅   |   ✅   |           |              |       |
+|                                                         | [Help Docs](https://docs.dvmn-agent.ai/tools/help_docs/?h=auto#auto-approval)     |   ✅   |   ✅   |    ✅     |              |       |
+|                                                         | [Update CHANGELOG](https://docs.dvmn-agent.ai/tools/update_changelog/)            |   ✅   |   ✅   |    ✅     |      ✅      |       |
 |                                                         |                                                                                                                     |        |        |           |              |       |
-| [USAGE](https://docs.pr-agent.ai/usage-guide/)   | [CLI](https://docs.pr-agent.ai/usage-guide/automations_and_usage/#local-repo-cli)                            |   ✅   |   ✅   |    ✅     |      ✅      |  ✅   |
-|                                                         | [App / webhook](https://docs.pr-agent.ai/usage-guide/automations_and_usage/#github-app)                      |   ✅   |   ✅   |    ✅     |      ✅      |  ✅   |
-|                                                         | [Tagging bot](https://github.com/the-pr-agent/pr-agent#try-it-now)                                                     |   ✅   |        |           |              |       |
-|                                                         | [Actions](https://docs.pr-agent.ai/installation/github/#run-as-a-github-action)                              |   ✅   |   ✅   |    ✅     |      ✅      |       |
+| [USAGE](https://docs.dvmn-agent.ai/usage-guide/)   | [CLI](https://docs.dvmn-agent.ai/usage-guide/automations_and_usage/#local-repo-cli)                            |   ✅   |   ✅   |    ✅     |      ✅      |  ✅   |
+|                                                         | [App / webhook](https://docs.dvmn-agent.ai/usage-guide/automations_and_usage/#github-app)                      |   ✅   |   ✅   |    ✅     |      ✅      |  ✅   |
+|                                                         | [Tagging bot](https://github.com/the-dvmn-agent/dvmn-agent#try-it-now)                                                     |   ✅   |        |           |              |       |
+|                                                         | [Actions](https://docs.dvmn-agent.ai/installation/github/#run-as-a-github-action)                              |   ✅   |   ✅   |    ✅     |      ✅      |       |
 |                                                         |                                                                                                                     |        |        |           |              |       |
-| [CORE](https://docs.pr-agent.ai/core-abilities/) | [Adaptive and token-aware file patch fitting](https://docs.pr-agent.ai/core-abilities/compression_strategy/) |   ✅   |   ✅   |    ✅     |      ✅      |       |
-|                                                         | [Dynamic context](https://docs.pr-agent.ai/core-abilities/dynamic_context/)                                  |   ✅   |   ✅   |    ✅     |      ✅      |       |
-|                                                         | [Fetching ticket context](https://docs.pr-agent.ai/core-abilities/fetching_ticket_context/)                  |   ✅    |  ✅    |     ✅     |              |       |
-|                                                         | [Interactivity](https://docs.pr-agent.ai/core-abilities/interactivity/)                                      |   ✅   |  ✅   |           |              |       |
-|                                                         | [Local and global metadata](https://docs.pr-agent.ai/core-abilities/metadata/)                               |   ✅   |   ✅   |    ✅     |      ✅      |       |
-|                                                         | [Multiple models support](https://docs.pr-agent.ai/usage-guide/changing_a_model/)                            |   ✅   |   ✅   |    ✅     |      ✅      |       |
-|                                                         | [PR compression](https://docs.pr-agent.ai/core-abilities/compression_strategy/)                              |   ✅   |   ✅   |    ✅     |      ✅      |       |
-|                                                         | [Self reflection](https://docs.pr-agent.ai/core-abilities/self_reflection/)                                  |   ✅   |   ✅   |    ✅     |      ✅      |       |
+| [CORE](https://docs.dvmn-agent.ai/core-abilities/) | [Adaptive and token-aware file patch fitting](https://docs.dvmn-agent.ai/core-abilities/compression_strategy/) |   ✅   |   ✅   |    ✅     |      ✅      |       |
+|                                                         | [Dynamic context](https://docs.dvmn-agent.ai/core-abilities/dynamic_context/)                                  |   ✅   |   ✅   |    ✅     |      ✅      |       |
+|                                                         | [Fetching ticket context](https://docs.dvmn-agent.ai/core-abilities/fetching_ticket_context/)                  |   ✅    |  ✅    |     ✅     |              |       |
+|                                                         | [Interactivity](https://docs.dvmn-agent.ai/core-abilities/interactivity/)                                      |   ✅   |  ✅   |           |              |       |
+|                                                         | [Local and global metadata](https://docs.dvmn-agent.ai/core-abilities/metadata/)                               |   ✅   |   ✅   |    ✅     |      ✅      |       |
+|                                                         | [Multiple models support](https://docs.dvmn-agent.ai/usage-guide/changing_a_model/)                            |   ✅   |   ✅   |    ✅     |      ✅      |       |
+|                                                         | [PR compression](https://docs.dvmn-agent.ai/core-abilities/compression_strategy/)                              |   ✅   |   ✅   |    ✅     |      ✅      |       |
+|                                                         | [Self reflection](https://docs.dvmn-agent.ai/core-abilities/self_reflection/)                                  |   ✅   |   ✅   |    ✅     |      ✅      |       |
 
 [//]: # (- Support for additional git providers is described in [here]&#40;./docs/Full_environments.md&#41;)
 ___
@@ -187,7 +187,7 @@ ___
 ## See It in Action
 
 </div>
-<h4><a href="https://github.com/the-pr-agent/pr-agent/pull/530">/describe</a></h4>
+<h4><a href="https://github.com/the-dvmn-agent/dvmn-agent/pull/530">/describe</a></h4>
 <div align="center">
 <p float="center">
 <img src="https://www.codium.ai/images/pr_agent/describe_new_short_main.png" width="512">
@@ -195,7 +195,7 @@ ___
 </div>
 <hr>
 
-<h4><a href="https://github.com/the-pr-agent/pr-agent/pull/732#issuecomment-1975099151">/review</a></h4>
+<h4><a href="https://github.com/the-dvmn-agent/dvmn-agent/pull/732#issuecomment-1975099151">/review</a></h4>
 <div align="center">
 <p float="center">
 <kbd>
@@ -205,7 +205,7 @@ ___
 </div>
 <hr>
 
-<h4><a href="https://github.com/the-pr-agent/pr-agent/pull/732#issuecomment-1975099159">/improve</a></h4>
+<h4><a href="https://github.com/the-dvmn-agent/dvmn-agent/pull/732#issuecomment-1975099159">/improve</a></h4>
 <div align="center">
 <p float="center">
 <kbd>
@@ -231,7 +231,7 @@ https://openai.com/enterprise-privacy
 
 ## Contributing
 
-To contribute to the project, get started by reading our [Contributing Guide](https://github.com/qodo-ai/pr-agent/blob/b09eec265ef7d36c232063f76553efb6b53979ff/CONTRIBUTING.md).
+To contribute to the project, get started by reading our [Contributing Guide](https://github.com/qodo-ai/dvmn-agent/blob/b09eec265ef7d36c232063f76553efb6b53979ff/CONTRIBUTING.md).
 
 
 ## ❤️ Community

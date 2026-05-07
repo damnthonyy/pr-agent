@@ -1,0 +1,38 @@
+name: Sync upstream -> create PR
+on:
+  schedule:
+    - cron: '0 2 * * *' # tous les jours à 02:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add upstream remote and fetch
+        run: |
+          git remote add upstream https://github.com/The-PR-Agent/dvmn-agent.git || true
+          git fetch upstream --tags
+
+      - name: Create branch from upstream/main
+        env:
+          BRANCH: sync/upstream-${{ github.run_id }}
+        run: |
+          git checkout -b "$BRANCH" upstream/main
+          git push origin HEAD:refs/heads/"$BRANCH"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: sync/upstream-${{ github.run_id }}
+          title: "sync: bring changes from upstream/main (run ${{ github.run_id }})"
+          body: "auto-generated PR to sync with upstream/main. Please review and merge if everything looks good."

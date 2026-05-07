@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pr-agent"
+name = "dvmn-agent"
 version = "0.34.3"
 
 authors = [
@@ -32,10 +32,10 @@ dynamic = ["dependencies"]
 dependencies = { file = ["requirements.txt"] }
 
 [project.urls]
-"Homepage" = "https://github.com/the-pr-agent/pr-agent"
-"Documentation" = "https://docs.pr-agent.ai/"
-"Repository" = "https://github.com/the-pr-agent/pr-agent"
-"Issues" = "https://github.com/the-pr-agent/pr-agent/issues"
+"Homepage" = "https://github.com/the-dvmn-agent/dvmn-agent"
+"Documentation" = "https://docs.dvmn-agent.ai/"
+"Repository" = "https://github.com/the-dvmn-agent/dvmn-agent"
+"Issues" = "https://github.com/the-dvmn-agent/dvmn-agent/issues"
 
 [tool.setuptools]
 include-package-data = true
@@ -47,7 +47,7 @@ include = [
 ] # include pr_agent and any sub-packages it finds under it.
 
 [project.scripts]
-pr-agent = "pr_agent.cli:run"
+dvmn-agent = "pr_agent.cli:run"
 
 [tool.ruff]
 line-length = 120

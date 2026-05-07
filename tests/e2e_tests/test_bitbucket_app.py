@@ -11,21 +11,17 @@ from requests.auth import HTTPBasicAuth
 
 from pr_agent.config_loader import get_settings
 from pr_agent.log import get_logger, setup_logger
-from tests.e2e_tests.e2e_utils import (
-    FILE_PATH,
-    IMPROVE_START_WITH_REGEX_PATTERN,
-    NEW_FILE_CONTENT,
-    NUM_MINUTES,
-    PR_HEADER_START_WITH,
-    REVIEW_START_WITH,
-)
+from tests.e2e_tests.e2e_utils import (FILE_PATH,
+                                       IMPROVE_START_WITH_REGEX_PATTERN,
+                                       NEW_FILE_CONTENT, NUM_MINUTES,
+                                       PR_HEADER_START_WITH, REVIEW_START_WITH)
 
 log_level = os.environ.get("LOG_LEVEL", "INFO")
 setup_logger(log_level)
 logger = get_logger()
 
 def test_e2e_run_bitbucket_app():
-    repo_slug = 'pr-agent-tests'
+    repo_slug = 'dvmn-agent-tests'
     project_key = 'codiumai'
     base_branch = "main"  # or any base branch you want
     new_branch = f"bitbucket_app_e2e_test-{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}"

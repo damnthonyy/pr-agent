@@ -1,1 +1,1 @@
-FROM pragent/pr-agent:github_action
+FROM pragent/dvmn-agent:github_action

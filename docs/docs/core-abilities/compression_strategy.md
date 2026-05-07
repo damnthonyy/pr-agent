@@ -31,8 +31,8 @@ In this case, we can fit the entire PR in a single prompt:
 
 #### Motivation
 
-Pull Requests can be very long and contain a lot of information with varying degree of relevance to the pr-agent.
-We want to be able to pack as much information as possible in a single LMM prompt, while keeping the information relevant to the pr-agent.
+Pull Requests can be very long and contain a lot of information with varying degree of relevance to the dvmn-agent.
+We want to be able to pack as much information as possible in a single LMM prompt, while keeping the information relevant to the dvmn-agent.
 
 #### Compression strategy
 

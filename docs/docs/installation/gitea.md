@@ -13,7 +13,7 @@ WEBHOOK_SECRET=$(python -c "import secrets; print(secrets.token_hex(10))")
 4. Clone this repository:
 
 ```bash
-git clone https://github.com/the-pr-agent/pr-agent.git
+git clone https://github.com/the-dvmn-agent/dvmn-agent.git
 ```
 
 5. Prepare variables and secrets. Skip this step if you plan on setting these as environment variables when running the agent:
@@ -26,8 +26,8 @@ git clone https://github.com/the-pr-agent/pr-agent.git
 6. Build a Docker image for the app and optionally push it to a Docker repository. We'll use Dockerhub as an example:
 
 ```bash
-docker build -f /docker/Dockerfile -t pr-agent:gitea_app --target gitea_app .
-docker push pragent/pr-agent:gitea_webhook  # Push to your Docker repository
+docker build -f /docker/Dockerfile -t dvmn-agent:gitea_app --target gitea_app .
+docker push pragent/dvmn-agent:gitea_webhook  # Push to your Docker repository
 ```
 
 7. Set the environmental variables, the method depends on your docker runtime. Skip this step if you included your secrets/configuration directly in the Docker image.

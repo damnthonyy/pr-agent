@@ -10,8 +10,9 @@ except:  # we don't enforce langchain as a dependency, so if it's not installed,
 import functools
 
 import openai
-from tenacity import retry, retry_if_exception_type, retry_if_not_exception_type, stop_after_attempt
 from langchain_core.runnables import Runnable
+from tenacity import (retry, retry_if_exception_type,
+                      retry_if_not_exception_type, stop_after_attempt)
 
 from pr_agent.algo.ai_handlers.base_ai_handler import BaseAiHandler
 from pr_agent.config_loader import get_settings
@@ -26,7 +27,7 @@ class LangChainOpenAIHandler(BaseAiHandler):
             error_msg = "LangChain is not installed. Please install it with `pip install langchain`."
             get_logger().error(error_msg)
             raise ImportError(error_msg)
-        
+
         super().__init__()
         self.azure = get_settings().get("OPENAI.API_TYPE", "").lower() == "azure"
 
@@ -54,7 +55,7 @@ class LangChainOpenAIHandler(BaseAiHandler):
                     return ChatOpenAI(openai_api_key=get_settings().openai.key)
                 else:
                     return ChatOpenAI(
-                        openai_api_key=get_settings().openai.key, 
+                        openai_api_key=get_settings().openai.key,
                         openai_api_base=openai_api_base
                     )
         except AttributeError as e:
@@ -73,7 +74,7 @@ class LangChainOpenAIHandler(BaseAiHandler):
         try:
             messages = [SystemMessage(content=system), HumanMessage(content=user)]
             llm = await self._create_chat_async(deployment_id=self.deployment_id)
-            
+
             if not isinstance(llm, Runnable):
                 error_message = (
                     f"The Langchain LLM object ({type(llm)}) does not implement the Runnable interface. "

@@ -11,7 +11,7 @@ stages:
 pr_agent_job:
   stage: pr_agent
   image:
-    name: pragent/pr-agent:latest
+    name: pragent/dvmn-agent:latest
     entrypoint: [""]
   script:
     - cd /app
@@ -60,7 +60,7 @@ SHARED_SECRET=$(python -c "import secrets; print(secrets.token_hex(10))")
 4. Clone this repository:
 
 ```bash
-git clone https://github.com/the-pr-agent/pr-agent.git
+git clone https://github.com/the-dvmn-agent/dvmn-agent.git
 ```
 
 5. Prepare variables and secrets. Skip this step if you plan on setting these as environment variables when running the agent:
@@ -76,7 +76,7 @@ git clone https://github.com/the-pr-agent/pr-agent.git
 
 ```bash
 docker build . -t gitlab_pr_agent --target gitlab_webhook -f docker/Dockerfile
-docker push pragent/pr-agent:gitlab_webhook  # Push to your Docker repository
+docker push pragent/dvmn-agent:gitlab_webhook  # Push to your Docker repository
 ```
 
 7. Set the environmental variables, the method depends on your docker runtime. Skip this step if you included your secrets/configuration directly in the Docker image.
@@ -104,19 +104,19 @@ For example: `GITLAB.PERSONAL_ACCESS_TOKEN` --> `GITLAB__PERSONAL_ACCESS_TOKEN`
 2. Build a docker image that can be used as a lambda function
 
     ```shell
-    docker buildx build --platform=linux/amd64 . -t pragent/pr-agent:gitlab_lambda --target gitlab_lambda -f docker/Dockerfile.lambda
+    docker buildx build --platform=linux/amd64 . -t pragent/dvmn-agent:gitlab_lambda --target gitlab_lambda -f docker/Dockerfile.lambda
    ```
 
 3. Push image to ECR
 
     ```shell
-    docker tag pragent/pr-agent:gitlab_lambda <AWS_ACCOUNT>.dkr.ecr.<AWS_REGION>.amazonaws.com/pragent/pr-agent:gitlab_lambda
-    docker push <AWS_ACCOUNT>.dkr.ecr.<AWS_REGION>.amazonaws.com/pragent/pr-agent:gitlab_lambda
+    docker tag pragent/dvmn-agent:gitlab_lambda <AWS_ACCOUNT>.dkr.ecr.<AWS_REGION>.amazonaws.com/pragent/dvmn-agent:gitlab_lambda
+    docker push <AWS_ACCOUNT>.dkr.ecr.<AWS_REGION>.amazonaws.com/pragent/dvmn-agent:gitlab_lambda
     ```
 
 4. Create a lambda function that uses the uploaded image. Set the lambda timeout to be at least 3m.
 5. Configure the lambda function to have a Function URL.
-6. In the environment variables of the Lambda function, specify `AZURE_DEVOPS_CACHE_DIR` to a writable location such as /tmp. (see [link](https://github.com/the-pr-agent/pr-agent/pull/450#issuecomment-1840242269))
+6. In the environment variables of the Lambda function, specify `AZURE_DEVOPS_CACHE_DIR` to a writable location such as /tmp. (see [link](https://github.com/the-dvmn-agent/dvmn-agent/pull/450#issuecomment-1840242269))
 7. Go back to steps 8-9 of [Run a GitLab webhook server](#run-a-gitlab-webhook-server) with the function URL as your Webhook URL.
     The Webhook URL would look like `https://<LAMBDA_FUNCTION_URL>/webhook`
 
@@ -133,7 +133,7 @@ For production Lambda deployments, use AWS Secrets Manager instead of environmen
 }
 ```
 
-2. Create a main configuration secret for common settings (e.g., secret name: `pr-agent-main-config`)
+2. Create a main configuration secret for common settings (e.g., secret name: `dvmn-agent-main-config`)
 
 ```json
 {
@@ -145,7 +145,7 @@ For production Lambda deployments, use AWS Secrets Manager instead of environmen
 
 ```bash
 CONFIG__SECRET_PROVIDER=aws_secrets_manager
-AWS_SECRETS_MANAGER__SECRET_ARN=arn:aws:secretsmanager:us-east-1:123456789012:secret:pr-agent-main-config-AbCdEf
+AWS_SECRETS_MANAGER__SECRET_ARN=arn:aws:secretsmanager:us-east-1:123456789012:secret:dvmn-agent-main-config-AbCdEf
 ```
 
 4. In your GitLab webhook configuration, set the **Secret Token** to the **Secret name** created in step 1:
